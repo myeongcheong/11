@@ -1,0 +1,2801 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>쓰레기의 순애 ♡</title>
+
+<style>
+
+/* =========================================================
+   FONT
+========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700;900&display=swap');
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+
+    overflow: hidden;
+
+    background: #ff1594;
+
+    color: #111b0d;
+
+    font-family:
+        "Noto Sans KR",
+        sans-serif;
+
+}
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root {
+
+    --pink: #ff1594;
+
+    --pink-light: #ff75c1;
+
+    --pink-dark: #c9006f;
+
+    --green: #101d0d;
+
+    --green-light: #263a1d;
+
+    --cream: #fff8df;
+
+    --yellow: #ffe96b;
+
+    --white: #fff;
+
+}
+
+
+/* =========================================================
+   APP
+========================================================= */
+
+#app {
+
+    position: relative;
+
+    width: 100vw;
+
+    height: 100vh;
+
+    overflow: hidden;
+
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.page {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transform:
+        scale(.97)
+        rotate(-.4deg);
+
+    transition:
+
+        opacity .45s ease,
+
+        transform .55s
+        cubic-bezier(.22,.61,.36,1),
+
+        visibility .45s;
+
+}
+
+.page.active {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+    transform:
+        scale(1)
+        rotate(0);
+
+}
+
+
+/* =========================================================
+   PAPER TEXTURE
+========================================================= */
+
+.page::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    opacity: .08;
+
+    background-image:
+
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 3px,
+            rgba(0,0,0,.4) 4px
+        );
+
+    mix-blend-mode: multiply;
+
+}
+
+
+/* =========================================================
+   DOODLES
+========================================================= */
+
+.doodle {
+
+    position: absolute;
+
+    pointer-events: none;
+
+    z-index: 2;
+
+    user-select: none;
+
+}
+
+
+/* stars */
+
+.star {
+
+    font-size: 32px;
+
+    color: var(--cream);
+
+    text-shadow:
+        2px 2px 0 var(--green);
+
+}
+
+
+/* heart */
+
+.heart {
+
+    color: var(--pink);
+
+    font-size: 60px;
+
+    text-shadow:
+        3px 3px 0 var(--green);
+
+}
+
+
+/* =========================================================
+   HOME
+========================================================= */
+
+#home {
+
+    background: var(--pink);
+
+}
+
+
+/* =========================================================
+   HOME IMAGE
+========================================================= */
+
+.home-image {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 1;
+
+    background-image:
+
+        linear-gradient(
+            90deg,
+            rgba(255,21,148,.05),
+            rgba(255,21,148,.15)
+        ),
+
+        url("images/main.jpg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+}
+
+
+/* =========================================================
+   HOME COLOR OVERLAY
+========================================================= */
+
+.home-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 2;
+
+    background:
+
+        linear-gradient(
+            180deg,
+            transparent 45%,
+            rgba(8,22,8,.88) 75%,
+            #101d0d 100%
+        );
+
+}
+
+
+/* =========================================================
+   HOME TITLE
+========================================================= */
+
+.home-title {
+
+    position: absolute;
+
+    z-index: 10;
+
+    left: 5%;
+
+    bottom: 7%;
+
+}
+
+
+/* =========================================================
+   SMALL TITLE
+========================================================= */
+
+.home-small {
+
+    display: inline-block;
+
+    padding: 7px 15px;
+
+    margin-bottom: 10px;
+
+    background: var(--cream);
+
+    color: var(--green);
+
+    border: 2px solid var(--green);
+
+    transform: rotate(-3deg);
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: 2px;
+
+}
+
+
+/* =========================================================
+   MAIN TITLE
+========================================================= */
+
+.logo {
+
+    font-family: "Jua", sans-serif;
+
+    font-size:
+        clamp(65px, 10vw, 145px);
+
+    line-height: .8;
+
+    color: #ff91ca;
+
+    -webkit-text-stroke:
+        3px var(--green);
+
+    text-shadow:
+
+        5px 5px 0 var(--green),
+
+        8px 8px 0 rgba(0,0,0,.2);
+
+    letter-spacing: -5px;
+
+}
+
+
+/* =========================================================
+   TITLE HEART
+========================================================= */
+
+.logo-heart {
+
+    color: var(--cream);
+
+    -webkit-text-stroke:
+        2px var(--green);
+
+}
+
+
+/* =========================================================
+   HOME TAG
+========================================================= */
+
+.home-tag {
+
+    display: inline-block;
+
+    margin-top: 25px;
+
+    padding: 8px 16px;
+
+    background: var(--green);
+
+    color: var(--cream);
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    transform: rotate(2deg);
+
+}
+
+
+/* =========================================================
+   ENTER
+========================================================= */
+
+.enter {
+
+    position: absolute;
+
+    right: 5%;
+
+    bottom: 7%;
+
+    z-index: 20;
+
+    width: 125px;
+
+    height: 125px;
+
+    border-radius: 50%;
+
+    border: 3px solid var(--green);
+
+    background: var(--cream);
+
+    color: var(--green);
+
+    cursor: pointer;
+
+    font-family:
+        "Jua",
+        sans-serif;
+
+    font-size: 17px;
+
+    transform: rotate(8deg);
+
+    box-shadow:
+        7px 7px 0 var(--green);
+
+    transition: .25s;
+
+}
+
+.enter:hover {
+
+    transform:
+        rotate(0deg)
+        scale(1.08);
+
+    box-shadow:
+        3px 3px 0 var(--green);
+
+}
+
+
+/* =========================================================
+   TOP LOGO
+========================================================= */
+
+.top-logo {
+
+    position: absolute;
+
+    z-index: 50;
+
+    top: 25px;
+
+    left: 30px;
+
+    font-family:
+        "Jua",
+        sans-serif;
+
+    font-size: 20px;
+
+    color: var(--cream);
+
+    -webkit-text-stroke:
+        1px var(--green);
+
+}
+
+
+/* =========================================================
+   MENU BUTTON
+========================================================= */
+
+.menu-button {
+
+    position: fixed;
+
+    z-index: 1000;
+
+    top: 25px;
+
+    right: 30px;
+
+    width: 60px;
+
+    height: 60px;
+
+    border-radius: 50%;
+
+    border: 3px solid var(--green);
+
+    background: var(--cream);
+
+    cursor: pointer;
+
+    box-shadow:
+        4px 4px 0 var(--green);
+
+    font-family:
+        "Jua",
+        sans-serif;
+
+    font-size: 13px;
+
+    color: var(--green);
+
+    transition: .25s;
+
+}
+
+.menu-button:hover {
+
+    transform:
+        rotate(-7deg)
+        scale(1.08);
+
+}
+
+
+/* =========================================================
+   MENU
+========================================================= */
+
+.menu {
+
+    position: fixed;
+
+    z-index: 900;
+
+    inset: 0;
+
+    background: var(--cream);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition: .4s;
+
+}
+
+.menu.open {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+}
+
+
+/* =========================================================
+   MENU INNER
+========================================================= */
+
+.menu-inner {
+
+    width: min(850px, 90%);
+
+}
+
+
+/* =========================================================
+   MENU TITLE
+========================================================= */
+
+.menu-title {
+
+    margin-bottom: 35px;
+
+    font-family:
+        "Jua",
+        sans-serif;
+
+    font-size:
+        clamp(45px, 8vw, 90px);
+
+    color: var(--green);
+
+    line-height: .8;
+
+}
+
+.menu-title span {
+
+    color: var(--pink);
+
+}
+
+
+/* =========================================================
+   MENU LIST
+========================================================= */
+
+.menu-list {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 12px;
+
+    list-style: none;
+
+}
+
+
+/* =========================================================
+   MENU ITEM
+========================================================= */
+
+.menu-list button {
+
+    width: 100%;
+
+    min-height: 80px;
+
+    border: 3px solid var(--green);
+
+    background: var(--pink);
+
+    color: var(--cream);
+
+    cursor: pointer;
+
+    padding: 18px 20px;
+
+    text-align: left;
+
+    font-family:
+        "Jua",
+        sans-serif;
+
+    font-size: 22px;
+
+    box-shadow:
+        5px 5px 0 var(--green);
+
+    transition: .2s;
+
+}
+
+.menu-list button:hover {
+
+    transform:
+        translate(4px,4px);
+
+    box-shadow:
+        1px 1px 0 var(--green);
+
+}
+
+.menu-number {
+
+    font-family:
+        "Noto Sans KR",
+        sans-serif;
+
+    font-size: 9px;
+
+    margin-right: 12px;
+
+    opacity: .65;
+
+}
+
+
+/* =========================================================
+   COMMON PAGE
+========================================================= */
+
+.page-content {
+
+    position: relative;
+
+    z-index: 5;
+
+    width: min(1050px, 88%);
+
+    height: 100%;
+
+    margin: auto;
+
+    padding:
+        110px 0 70px;
+
+    overflow-y: auto;
+
+}
+
+.page-content::-webkit-scrollbar {
+
+    width: 5px;
+
+}
+
+.page-content::-webkit-scrollbar-thumb {
+
+    background: var(--green);
+
+}
+
+
+/* =========================================================
+   BACK
+========================================================= */
+
+.back-button {
+
+    position: absolute;
+
+    z-index: 30;
+
+    top: 25px;
+
+    left: 30px;
+
+    border: 3px solid var(--green);
+
+    background: var(--cream);
+
+    color: var(--green);
+
+    padding: 10px 18px;
+
+    font-family:
+        "Jua",
+        sans-serif;
+
+    cursor: pointer;
+
+    box-shadow:
+        4px 4px 0 var(--green);
+
+}
+
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+.page-number {
+
+    display: inline-block;
+
+    background: var(--green);
+
+    color: var(--cream);
+
+    padding: 6px 12px;
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    transform: rotate(-2deg);
+
+    margin-bottom: 20px;
+
+}
+
+.page-title {
+
+    font-family:
+        "Jua",
+        sans-serif;
+
+    font-size:
+        clamp(50px, 8vw, 100px);
+
+    line-height: .85;
+
+    color: var(--green);
+
+    letter-spacing: -3px;
+
+}
+
+.page-title span {
+
+    color: var(--pink);
+
+}
+
+.page-description {
+
+    margin-top: 25px;
+
+    max-width: 650px;
+
+    color: #394330;
+
+    font-size: 13px;
+
+    line-height: 2;
+
+}
+
+
+/* =========================================================
+   STORY
+========================================================= */
+
+#story {
+
+    background: var(--pink);
+
+}
+
+
+.story-grid {
+
+    margin-top: 60px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 15px;
+
+}
+
+.story-card {
+
+    padding: 35px;
+
+    min-height: 270px;
+
+    background: var(--cream);
+
+    border: 3px solid var(--green);
+
+    box-shadow:
+        6px 6px 0 var(--green);
+
+    transform:
+        rotate(-.5deg);
+
+}
+
+.story-card:nth-child(even) {
+
+    transform:
+        rotate(.7deg);
+
+}
+
+.story-number {
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    color: var(--pink-dark);
+
+    margin-bottom: 30px;
+
+}
+
+.story-card h3 {
+
+    font-family:
+        "Jua",
+        sans-serif;
+
+    font-size: 30px;
+
+    color: var(--green);
+
+    margin-bottom: 18px;
+
+}
+
+.story-card p {
+
+    font-size: 12px;
+
+    line-height: 2;
+
+    color: #47503e;
+
+}
+
+
+/* =========================================================
+   CHARACTER
+========================================================= */
+
+#character {
+
+    background: var(--cream);
+
+}
+
+
+.character-layout {
+
+    margin-top: 55px;
+
+    display: grid;
+
+    grid-template-columns:
+        390px 1fr;
+
+    gap: 55px;
+
+}
+
+
+.character-image {
+
+    width: 100%;
+
+    aspect-ratio: 3 / 4;
+
+    object-fit: cover;
+
+    border: 4px solid var(--green);
+
+    box-shadow:
+        9px 9px 0 var(--pink);
+
+    transform:
+        rotate(-2deg);
+
+}
+
+
+.profile {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    border-top: 3px solid var(--green);
+
+}
+
+
+.profile-item {
+
+    padding: 18px 10px;
+
+    border-bottom: 2px solid var(--green);
+
+}
+
+.profile-label {
+
+    display: block;
+
+    color: var(--pink-dark);
+
+    font-size: 9px;
+
+    font-weight: 900;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 5px;
+
+}
+
+.profile-value {
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    color: var(--green);
+
+}
+
+.character-text {
+
+    margin-top: 30px;
+
+    padding: 25px;
+
+    background: var(--pink);
+
+    border: 3px solid var(--green);
+
+    box-shadow:
+        5px 5px 0 var(--green);
+
+    font-size: 12px;
+
+    line-height: 2;
+
+}
+
+
+/* =========================================================
+   RELATION
+========================================================= */
+
+#relation {
+
+    background:
+        var(--green);
+
+    color: var(--cream);
+
+}
+
+
+#relation .page-title {
+
+    color: var(--cream);
+
+}
+
+#relation .page-description {
+
+    color: #c7cbbd;
+
+}
+
+.relation-grid {
+
+    margin-top: 60px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 15px;
+
+}
+
+.relation-card {
+
+    min-height: 260px;
+
+    padding: 35px;
+
+    background: var(--cream);
+
+    color: var(--green);
+
+    border: 3px solid var(--pink);
+
+    box-shadow:
+        7px 7px 0 var(--pink);
+
+}
+
+.relation-card.pink {
+
+    background: var(--pink);
+
+    color: var(--green);
+
+    border-color: var(--cream);
+
+    box-shadow:
+        7px 7px 0 var(--cream);
+
+}
+
+.relation-card h3 {
+
+    font-family:
+        "Jua",
+        sans-serif;
+
+    font-size: 32px;
+
+    margin-bottom: 20px;
+
+}
+
+.relation-card p {
+
+    font-size: 12px;
+
+    line-height: 2;
+
+}
+
+
+/* =========================================================
+   PAST
+========================================================= */
+
+#past {
+
+    background: var(--pink);
+
+}
+
+.past-list {
+
+    margin-top: 60px;
+
+    border-top: 4px solid var(--green);
+
+}
+
+.past-item {
+
+    display: grid;
+
+    grid-template-columns:
+        140px 1fr;
+
+    padding: 30px 0;
+
+    border-bottom:
+        2px solid var(--green);
+
+}
+
+.past-year {
+
+    font-family:
+        "Jua",
+        sans-serif;
+
+    font-size: 22px;
+
+    color: var(--green);
+
+}
+
+.past-item h3 {
+
+    font-family:
+        "Jua",
+        sans-serif;
+
+    font-size: 26px;
+
+    color: var(--green);
+
+    margin-bottom: 10px;
+
+}
+
+.past-item p {
+
+    max-width: 650px;
+
+    font-size: 12px;
+
+    line-height: 2;
+
+    color: #36402e;
+
+}
+
+
+/* =========================================================
+   QUOTES
+========================================================= */
+
+#quotes {
+
+    background: var(--cream);
+
+}
+
+.quote-list {
+
+    margin-top: 60px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+
+}
+
+.quote {
+
+    position: relative;
+
+    padding: 35px 45px;
+
+    background: var(--green);
+
+    color: var(--cream);
+
+    border: 3px solid var(--green);
+
+    box-shadow:
+        7px 7px 0 var(--pink);
+
+}
+
+.quote:nth-child(even) {
+
+    background: var(--pink);
+
+    color: var(--green);
+
+}
+
+.quote::before {
+
+    content: "“";
+
+    position: absolute;
+
+    top: 5px;
+
+    left: 15px;
+
+    font-family:
+        "Jua",
+        sans-serif;
+
+    font-size: 60px;
+
+    color: var(--pink-light);
+
+}
+
+.quote-text {
+
+    font-family:
+        "Jua",
+        sans-serif;
+
+    font-size:
+        clamp(20px, 3vw, 31px);
+
+    line-height: 1.5;
+
+}
+
+.quote-info {
+
+    margin-top: 15px;
+
+    font-size: 9px;
+
+    font-weight: 900;
+
+    opacity: .55;
+
+}
+
+
+/* =========================================================
+   SECRET
+========================================================= */
+
+#secret {
+
+    background:
+
+        radial-gradient(
+            circle at center,
+            #ff6fba,
+            var(--pink) 45%,
+            #d80078
+        );
+
+}
+
+
+.secret-wrap {
+
+    width: min(850px, 88%);
+
+    height: 100%;
+
+    margin: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+}
+
+
+.secret-box {
+
+    position: relative;
+
+    padding: 60px;
+
+    background: var(--cream);
+
+    border: 5px solid var(--green);
+
+    box-shadow:
+        12px 12px 0 var(--green);
+
+    transform:
+        rotate(-1deg);
+
+}
+
+.secret-box h2 {
+
+    font-family:
+        "Jua",
+        sans-serif;
+
+    font-size:
+        clamp(45px, 7vw, 80px);
+
+    line-height: .9;
+
+    color: var(--green);
+
+}
+
+.secret-box h2 span {
+
+    color: var(--pink);
+
+}
+
+.secret-box p {
+
+    margin-top: 25px;
+
+    font-size: 13px;
+
+    line-height: 2;
+
+    color: #4b5543;
+
+}
+
+.reveal {
+
+    margin-top: 30px;
+
+    padding: 15px 25px;
+
+    background: var(--green);
+
+    border: 3px solid var(--green);
+
+    color: var(--cream);
+
+    cursor: pointer;
+
+    font-family:
+        "Jua",
+        sans-serif;
+
+    font-size: 15px;
+
+    box-shadow:
+        5px 5px 0 var(--pink);
+
+}
+
+.secret-message {
+
+    display: none;
+
+    margin-top: 30px;
+
+    padding-top: 25px;
+
+    border-top: 2px dashed var(--pink);
+
+    font-family:
+        "Jua",
+        sans-serif;
+
+    font-size: 20px;
+
+    line-height: 1.8;
+
+    color: var(--green);
+
+}
+
+.secret-message.show {
+
+    display: block;
+
+    animation:
+        pop .5s ease;
+
+}
+
+@keyframes pop {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            scale(.8)
+            rotate(-3deg);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            scale(1)
+            rotate(0);
+
+    }
+
+}
+
+
+/* =========================================================
+   DOODLE POSITIONS
+========================================================= */
+
+.doodle-1 {
+
+    top: 12%;
+
+    left: 5%;
+
+    transform: rotate(-15deg);
+
+}
+
+.doodle-2 {
+
+    top: 18%;
+
+    right: 12%;
+
+    transform: rotate(10deg);
+
+}
+
+.doodle-3 {
+
+    bottom: 25%;
+
+    right: 30%;
+
+    transform: rotate(-10deg);
+
+}
+
+.doodle-4 {
+
+    top: 30%;
+
+    left: 2%;
+
+    font-size: 45px;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .menu-list {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .menu-list button {
+
+        min-height: 65px;
+
+    }
+
+    .home-image {
+
+        background-position:
+            58% center;
+
+    }
+
+    .home-title {
+
+        left: 6%;
+
+        bottom: 12%;
+
+    }
+
+    .logo {
+
+        font-size: 65px;
+
+    }
+
+    .enter {
+
+        width: 90px;
+
+        height: 90px;
+
+        right: 5%;
+
+        bottom: 5%;
+
+        font-size: 13px;
+
+    }
+
+    .character-layout {
+
+        grid-template-columns: 1fr;
+
+        gap: 40px;
+
+    }
+
+    .character-image {
+
+        max-width: 360px;
+
+    }
+
+    .relation-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .story-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .past-item {
+
+        grid-template-columns:
+            80px 1fr;
+
+    }
+
+    .profile {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+    .secret-box {
+
+        padding: 35px 25px;
+
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .top-logo {
+
+        left: 15px;
+
+        top: 18px;
+
+    }
+
+    .menu-button {
+
+        right: 15px;
+
+        top: 15px;
+
+        width: 50px;
+
+        height: 50px;
+
+    }
+
+    .page-content {
+
+        width: 82%;
+
+    }
+
+    .back-button {
+
+        top: 18px;
+
+        left: 15px;
+
+    }
+
+    .logo {
+
+        font-size: 55px;
+
+        -webkit-text-stroke:
+            2px var(--green);
+
+        text-shadow:
+            4px 4px 0 var(--green);
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div id="app">
+
+
+<!-- =====================================================
+     HOME
+===================================================== -->
+
+<section
+    class="page active"
+    id="home">
+
+
+    <div class="home-image"></div>
+
+    <div class="home-overlay"></div>
+
+
+    <div class="top-logo">
+
+        CRACK ♡ STORY
+
+    </div>
+
+
+    <div
+        class="doodle star doodle-1">
+        ✦
+    </div>
+
+    <div
+        class="doodle star doodle-2">
+        ☆
+    </div>
+
+    <div
+        class="doodle heart doodle-3">
+        ♡
+    </div>
+
+    <div
+        class="doodle star doodle-4">
+        ✧
+    </div>
+
+
+    <div class="home-title">
+
+        <div class="home-small">
+
+            MODERN ROMANCE
+
+        </div>
+
+
+        <div class="logo">
+
+            쓰레기의<br>
+
+            순애
+            <span class="logo-heart">
+                ♡
+            </span>
+
+        </div>
+
+
+        <div class="home-tag">
+
+            나쁜 놈에게 사랑받는 법
+
+        </div>
+
+    </div>
+
+
+    <button
+        class="enter"
+        onclick="openPage('story')">
+
+        START<br>
+
+        <span>
+            →
+        </span>
+
+    </button>
+
+
+</section>
+
+
+<!-- =====================================================
+     MENU
+===================================================== -->
+
+<button
+    class="menu-button"
+    id="menuButton"
+    onclick="toggleMenu()">
+
+    MENU
+
+</button>
+
+
+<nav
+    class="menu"
+    id="menu">
+
+
+    <div class="menu-inner">
+
+
+        <div class="menu-title">
+
+            쓰레기의<br>
+
+            <span>순애.</span>
+
+        </div>
+
+
+        <ul class="menu-list">
+
+
+            <li>
+
+                <button
+                    onclick="openPage('home')">
+
+                    <span class="menu-number">
+                        00
+                    </span>
+
+                    HOME
+
+                </button>
+
+            </li>
+
+
+            <li>
+
+                <button
+                    onclick="openPage('story')">
+
+                    <span class="menu-number">
+                        01
+                    </span>
+
+                    STORY
+
+                </button>
+
+            </li>
+
+
+            <li>
+
+                <button
+                    onclick="openPage('character')">
+
+                    <span class="menu-number">
+                        02
+                    </span>
+
+                    CHARACTER
+
+                </button>
+
+            </li>
+
+
+            <li>
+
+                <button
+                    onclick="openPage('relation')">
+
+                    <span class="menu-number">
+                        03
+                    </span>
+
+                    RELATION
+
+                </button>
+
+            </li>
+
+
+            <li>
+
+                <button
+                    onclick="openPage('past')">
+
+                    <span class="menu-number">
+                        04
+                    </span>
+
+                    PAST
+
+                </button>
+
+            </li>
+
+
+            <li>
+
+                <button
+                    onclick="openPage('quotes')">
+
+                    <span class="menu-number">
+                        05
+                    </span>
+
+                    QUOTES
+
+                </button>
+
+            </li>
+
+
+            <li>
+
+                <button
+                    onclick="openPage('secret')">
+
+                    <span class="menu-number">
+                        06
+                    </span>
+
+                    SECRET ♡
+
+                </button>
+
+            </li>
+
+
+        </ul>
+
+
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+     STORY
+===================================================== -->
+
+<section
+    class="page"
+    id="story">
+
+
+    <button
+        class="back-button"
+        onclick="openPage('home')">
+
+        ← HOME
+
+    </button>
+
+
+    <div class="doodle star doodle-1">
+        ✦
+    </div>
+
+    <div class="doodle star doodle-2">
+        ☆
+    </div>
+
+
+    <div class="page-content">
+
+
+        <div class="page-number">
+
+            01 / STORY
+
+        </div>
+
+
+        <h1 class="page-title">
+
+            나쁜 놈과<br>
+
+            <span>사랑에 빠지는 법♡</span>
+
+        </h1>
+
+
+        <p class="page-description">
+
+            [두 사람이 처음 만난 날부터
+            지금까지의 이야기를 작성해주세요.]
+
+            <br>
+
+            [겉보기에는 최악의 인간이지만
+            이상하게도 {user}에게만 특별한
+            모습을 보여주는 관계.]
+
+        </p>
+
+
+        <div class="story-grid">
+
+
+            <article class="story-card">
+
+                <div class="story-number">
+                    CHAPTER 01
+                </div>
+
+                <h3>
+                    첫인상은 최악
+                </h3>
+
+                <p>
+
+                    [첫 만남을 작성해주세요.]
+
+                    <br><br>
+
+                    [캐릭터가 얼마나 재수 없었는지,
+                    그리고 {user}가 그를
+                    어떻게 생각했는지.]
+
+                </p>
+
+            </article>
+
+
+            <article class="story-card">
+
+                <div class="story-number">
+                    CHAPTER 02
+                </div>
+
+                <h3>
+                    그런데 자꾸 봄
+                </h3>
+
+                <p>
+
+                    [자꾸 마주치게 되는 상황.]
+
+                    <br><br>
+
+                    [조금씩 관계가 변하는 과정.]
+
+                </p>
+
+            </article>
+
+
+            <article class="story-card">
+
+                <div class="story-number">
+                    CHAPTER 03
+                </div>
+
+                <h3>
+                    너한테만 다름
+                </h3>
+
+                <p>
+
+                    [다른 사람들에게는 차갑고
+                    무관심하지만 {user}에게만
+                    이상하게 다정한 모습.]
+
+                </p>
+
+            </article>
+
+
+            <article class="story-card">
+
+                <div class="story-number">
+                    CHAPTER 04
+                </div>
+
+                <h3>
+                    결국 좋아함
+                </h3>
+
+                <p>
+
+                    [캐릭터가 자신의 감정을
+                    인정하게 되는 장면.]
+
+                    <br><br>
+
+                    [순애가 시작되는 순간.]
+
+                </p>
+
+            </article>
+
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CHARACTER
+===================================================== -->
+
+<section
+    class="page"
+    id="character">
+
+
+    <button
+        class="back-button"
+        onclick="openPage('home')">
+
+        ← HOME
+
+    </button>
+
+
+    <div class="page-content">
+
+
+        <div class="page-number">
+            02 / CHARACTER
+        </div>
+
+
+        <h1 class="page-title">
+
+            이 남자,<br>
+
+            <span>쓰레기입니다.</span>
+
+        </h1>
+
+
+        <div class="character-layout">
+
+
+            <div>
+
+                <img
+                    src="images/character-profile.jpg"
+                    class="character-image"
+                    alt="character">
+
+            </div>
+
+
+            <div>
+
+
+                <div class="profile">
+
+
+                    <div class="profile-item">
+
+                        <span class="profile-label">
+                            NAME
+                        </span>
+
+                        <span class="profile-value">
+                            [캐릭터 이름]
+                        </span>
+
+                    </div>
+
+
+                    <div class="profile-item">
+
+                        <span class="profile-label">
+                            AGE
+                        </span>
+
+                        <span class="profile-value">
+                            [나이]
+                        </span>
+
+                    </div>
+
+
+                    <div class="profile-item">
+
+                        <span class="profile-label">
+                            JOB
+                        </span>
+
+                        <span class="profile-value">
+                            [직업]
+                        </span>
+
+                    </div>
+
+
+                    <div class="profile-item">
+
+                        <span class="profile-label">
+                            HEIGHT
+                        </span>
+
+                        <span class="profile-value">
+                            [키]
+                        </span>
+
+                    </div>
+
+
+                    <div class="profile-item">
+
+                        <span class="profile-label">
+                            MBTI
+                        </span>
+
+                        <span class="profile-value">
+                            [MBTI]
+                        </span>
+
+                    </div>
+
+
+                    <div class="profile-item">
+
+                        <span class="profile-label">
+                            LOVE TYPE
+                        </span>
+
+                        <span class="profile-value">
+                            [순애형]
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="character-text">
+
+                    [캐릭터 소개를 작성해주세요.]
+
+                    <br><br>
+
+                    [성격 / 말투 / 특징 / 취향.]
+
+                    <br><br>
+
+                    그리고 가장 중요한 것.
+
+                    <br>
+
+                    <strong>
+                        [왜 이 사람이 쓰레기인지.]
+                    </strong>
+
+                    <br><br>
+
+                    하지만,
+
+                    <br>
+
+                    <strong>
+                        [왜 {user}에게만 순애인지.]
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     RELATION
+===================================================== -->
+
+<section
+    class="page"
+    id="relation">
+
+
+    <button
+        class="back-button"
+        onclick="openPage('home')">
+
+        ← HOME
+
+    </button>
+
+
+    <div class="page-content">
+
+
+        <div class="page-number">
+
+            03 / RELATION
+
+        </div>
+
+
+        <h1 class="page-title">
+
+            세상에는 <span>쓰레기.</span><br>
+
+            나한테는 <span>남자친구.</span>
+
+        </h1>
+
+
+        <p class="page-description">
+
+            [두 사람의 관계를 작성해주세요.]
+
+        </p>
+
+
+        <div class="relation-grid">
+
+
+            <div class="relation-card">
+
+                <h3>
+                    BEFORE
+                </h3>
+
+                <p>
+
+                    [처음에는 서로 어떤 사이였는지.]
+
+                    <br><br>
+
+                    [캐릭터가 {user}를
+                    어떻게 생각했는지.]
+
+                </p>
+
+            </div>
+
+
+            <div class="relation-card pink">
+
+                <h3>
+                    NOW ♡
+                </h3>
+
+                <p>
+
+                    [현재의 관계.]
+
+                    <br><br>
+
+                    [연인 / 썸 / 짝사랑 등.]
+
+                </p>
+
+            </div>
+
+
+            <div class="relation-card">
+
+                <h3>
+                    밖에서는
+                </h3>
+
+                <p>
+
+                    [다른 사람들에게 보이는 모습.]
+
+                    <br><br>
+
+                    싸가지 없음.
+                    무관심.
+                    제멋대로.
+
+                </p>
+
+            </div>
+
+
+            <div class="relation-card pink">
+
+                <h3>
+                    나한테는
+                </h3>
+
+                <p>
+
+                    [오직 {user}에게만 보이는
+                    캐릭터의 모습을 작성해주세요.]
+
+                    <br><br>
+
+                    질투하고,
+                    챙겨주고,
+                    사랑한다고 말한다.
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PAST
+===================================================== -->
+
+<section
+    class="page"
+    id="past">
+
+
+    <button
+        class="back-button"
+        onclick="openPage('home')">
+
+        ← HOME
+
+    </button>
+
+
+    <div class="page-content">
+
+
+        <div class="page-number">
+            04 / PAST
+        </div>
+
+
+        <h1 class="page-title">
+
+            네가 오기 전의<br>
+
+            <span>그 사람.</span>
+
+        </h1>
+
+
+        <div class="past-list">
+
+
+            <div class="past-item">
+
+                <div class="past-year">
+                    20XX
+                </div>
+
+                <div>
+
+                    <h3>
+                        [과거 사건]
+                    </h3>
+
+                    <p>
+
+                        [캐릭터의 과거.]
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="past-item">
+
+                <div class="past-year">
+                    20XX
+                </div>
+
+                <div>
+
+                    <h3>
+                        [과거 사건]
+                    </h3>
+
+                    <p>
+
+                        [캐릭터의 가치관이나
+                        성격을 만든 사건.]
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="past-item">
+
+                <div class="past-year">
+                    20XX
+                </div>
+
+                <div>
+
+                    <h3>
+                        그리고 너를 만났다.
+                    </h3>
+
+                    <p>
+
+                        [두 사람의 만남.]
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     QUOTES
+===================================================== -->
+
+<section
+    class="page"
+    id="quotes">
+
+
+    <button
+        class="back-button"
+        onclick="openPage('home')">
+
+        ← HOME
+
+    </button>
+
+
+    <div class="page-content">
+
+
+        <div class="page-number">
+            05 / QUOTES
+        </div>
+
+
+        <h1 class="page-title">
+
+            그 새끼가<br>
+
+            <span>했던 말.</span>
+
+        </h1>
+
+
+        <div class="quote-list">
+
+
+            <div class="quote">
+
+                <div class="quote-text">
+
+                    “ [대표 대사] ”
+
+                </div>
+
+                <div class="quote-info">
+
+                    — [상황]
+
+                </div>
+
+            </div>
+
+
+            <div class="quote">
+
+                <div class="quote-text">
+
+                    “ [츤데레 / 쓰레기 같은 대사] ”
+
+                </div>
+
+                <div class="quote-info">
+
+                    — [상황]
+
+                </div>
+
+            </div>
+
+
+            <div class="quote">
+
+                <div class="quote-text">
+
+                    “ [순애가 드러나는 대사] ”
+
+                </div>
+
+                <div class="quote-info">
+
+                    — ONLY TO YOU ♡
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     SECRET
+===================================================== -->
+
+<section
+    class="page"
+    id="secret">
+
+
+    <div class="secret-wrap">
+
+
+        <div class="secret-box">
+
+
+            <div class="page-number">
+
+                06 / SECRET
+
+            </div>
+
+
+            <h2>
+
+                사실은<br>
+
+                <span>너를 제일 좋아해♡</span>
+
+            </h2>
+
+
+            <p>
+
+                아무에게도 말하지 않은 이야기.
+
+                <br>
+
+                이 남자의 진짜 마음을
+                확인하시겠습니까?
+
+            </p>
+
+
+            <button
+                class="reveal"
+                onclick="revealSecret()">
+
+                ♡ 열어보기 ♡
+
+            </button>
+
+
+            <div
+                class="secret-message"
+                id="secretMessage">
+
+                [캐릭터의 진짜 속마음]
+
+                <br><br>
+
+                “ [가장 중요한 순애 대사] ”
+
+                <br><br>
+
+                <span
+                    style="color:#ff1594;">
+
+                    사실 처음부터 너만 좋아했다.
+
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   ELEMENT
+========================================================= */
+
+const menu =
+    document.getElementById("menu");
+
+const menuButton =
+    document.getElementById("menuButton");
+
+const pages =
+    document.querySelectorAll(".page");
+
+
+/* =========================================================
+   MENU
+========================================================= */
+
+function toggleMenu() {
+
+    menu.classList.toggle("open");
+
+}
+
+
+/* =========================================================
+   OPEN PAGE
+========================================================= */
+
+function openPage(id) {
+
+
+    pages.forEach(page => {
+
+        page.classList.remove("active");
+
+    });
+
+
+    const target =
+        document.getElementById(id);
+
+
+    if (!target) return;
+
+
+    target.classList.add("active");
+
+
+    const content =
+        target.querySelector(".page-content");
+
+
+    if (content) {
+
+        content.scrollTop = 0;
+
+    }
+
+
+    menu.classList.remove("open");
+
+
+}
+
+
+/* =========================================================
+   SECRET
+========================================================= */
+
+function revealSecret() {
+
+    const message =
+        document.getElementById(
+            "secretMessage"
+        );
+
+
+    const button =
+        document.querySelector(".reveal");
+
+
+    message.classList.toggle("show");
+
+
+    if (
+        message.classList.contains("show")
+    ) {
+
+        button.innerText =
+            "♡ 닫기 ♡";
+
+    } else {
+
+        button.innerText =
+            "♡ 열어보기 ♡";
+
+    }
+
+}
+
+
+/* =========================================================
+   ESC
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (event.key === "Escape") {
+
+            menu.classList.remove("open");
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>
